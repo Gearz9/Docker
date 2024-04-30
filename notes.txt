@@ -1,0 +1,103 @@
+### Docker Run Commands:
+
+1. **Mapping Ports:**
+   - `docker run -p 4000:3000 d7b74fdab0dc`
+     - Port 4000 on the host machine maps to port 3000 on the Docker container.
+
+2. **Detached Mode:**
+   - `docker run -d -p 3000:3000 [imageID]`
+     - The `-d` flag runs the container in detached mode, allowing it to run in the background.
+
+3. **Interactive Terminal:**
+   - `docker run -it [imageID]`
+     - `-it` flag enables interactive terminal mode, useful for containers requiring user interaction.
+
+4. **Using Volumes:**
+   - `docker run -it --rm -v volume-name:/wordir/ [imageID]`
+     - Use volumes with `-v` to store data. Ensure the volume path matches the program's data storage path.
+
+   - Alternatively, bind to a local path:
+     - `docker run -v absolute-path-of-file:/wordir/file-name.txt [imageId]`
+
+### Docker Build Command:
+
+- **Building Docker Image:**
+  - `docker build -t my-web-app:01 .`
+    - The `-t` flag tags the image with a name (`my-web-app`) and a version (`01`).
+    - `:01` signifies version number 01.
+    - The dot (`.`) denotes that the Dockerfile is located in the current directory.
+
+### Docker Image Management:
+
+- **Listing Images:**
+  - `docker images` or `docker image ls`
+
+- **Removing Images:**
+  - `docker rmi image-name:version`
+
+### Docker Container Management:
+
+- **Listing Containers:**
+  - `docker ps` or `docker ps -a`
+
+- **Stopping Containers:**
+  - `docker stop [name]`
+
+- **Removing Containers:**
+  - `docker rm name1 name2 name3`
+
+- **Custom Container Names:**
+  - Assign a custom name:
+    - `docker run -d --rm --name "customName" -p 3000:3000 d7b74fdab0dc`
+
+### Docker Volume Management:
+
+- **Listing Volumes:**
+  - `docker volume ls`
+
+### Docker Network Management:
+
+- **Listing Networks:**
+  - `docker network ls`
+
+- **Removing Networks:**
+  - `docker network rm [networkID]`
+
+### Docker Compose:
+
+- **Running Compose File:**
+  - `docker-compose up`
+
+- **Running in Detached Mode:**
+  - `docker-compose up -d`
+
+- **Stopping Compose File:**
+  - `docker-compose down`
+
+- **Removing Compose File with Resources:**
+  - `docker-compose down -v`
+
+### Additional Notes:
+
+- **Inspecting Containers:**
+  - `docker inspect [container-name]`
+
+- **Running MySQL Container:**
+  - Example: `docker run -d --env MYSQL_ROOT_PASSWORD="root" --env MYSQL_DATABASE="userinfo" --name mysqldb mysql`
+
+- **Orphan Containers:**
+  - Clean up orphan containers with `docker-compose down --remove-orphans`.
+
+- **Docker Network Interactions:**
+  - Run a container in a specific network: 
+    - `docker run -it --rm --network [network-name] [containerID]`
+
+### Additional Docker Compose Notes:
+
+- **Cleaning Orphan Containers:**
+  - Use `docker-compose down --remove-orphans` to remove orphan containers.
+
+- **Automatic Network Creation:**
+  - Docker Compose automatically creates a network for services, eliminating the need for manual network setup.
+
+---

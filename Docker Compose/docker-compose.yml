@@ -1,0 +1,30 @@
+services:
+  mysqldb:
+    image: "mysql:latest"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=userinfo
+
+    container_name: "mysqldbCompose"
+    # if we want to give network name
+    networks:
+      - my-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  mypythonapp:
+    build: ./
+    container_name: mypyapp
+    networks:
+      - my-network
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    stdin_open: true
+    tty: true
+
+# if given network name just mention all the networks name  
+networks:
+  my-network:
